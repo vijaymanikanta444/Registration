@@ -58,6 +58,9 @@
   border: 0;
   margin: 10px;
   margin-bottom: 30px;
+  border-radius: 5px;
+  float: right;
+  padding: 5px 10px;
 }
 
 thead {
@@ -84,6 +87,22 @@ thead {
 
 .error {
   color: red;
+}
+.btn-danger {
+  color: white;
+  background-color: red;
+  border: red;
+}
+
+.red:hover {
+  color: white;
+  background-color: #a93226;
+  border: red;
+}
+.center {
+  text-align: center;
+  justify-content: center;
+  margin: 20px;
 }
 /* @media (max-width: 900px) {
   body {

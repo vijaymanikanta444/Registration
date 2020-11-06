@@ -12,6 +12,42 @@ code {
     monospace;
 }
 
+.input {
+  margin-left: 20px;
+  padding-bottom: 5px;
+}
+
+.sort {
+  display: inline;
+  height: 20px;
+  width: 40px;
+}
+
+.sortb {
+  padding: 0;
+  border: none;
+  margin: 2px;
+}
+
+/* .sort .active {
+  background-color: none;
+  color: red;
+} */
+
+/* .btn-primary.active {
+
+  background-color: none;
+  color: red;
+} */
+
+.btn-primary:not(:disabled):not(.disabled).active,
+.btn-primary:not(:disabled):not(.disabled):active,
+.show > .btn-primary.dropdown-toggle {
+  color: #272829;
+  border-color: #272829;
+  background-color: rgb(52, 152, 219);
+}
+
 /* .btn {
   background: #3498db;
 } */
