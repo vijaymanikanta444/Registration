@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { deletePerson, editPerson } from '../actions/personActions';
+import Pagination from './Pagination';
 
 class PersonList extends Component {
   state = {
@@ -11,6 +12,8 @@ class PersonList extends Component {
     // gender: '',
     currentSortCol: '',
     currentSortOrder: '',
+    currentPage: 1,
+    personsPerPage: 3,
   };
 
   getdata = () => {
@@ -67,7 +70,37 @@ class PersonList extends Component {
     this.props.editPerson(e.target.id);
   };
 
+  firstPage = () => {
+    this.state.currentPage > 1 && this.setState({ currentPage: 1 });
+  };
+
+  prevPage = () => {
+    this.state.currentPage > 1 &&
+      this.setState({ currentPage: this.state.currentPage - 1 });
+  };
+  pagination = (pageNumber) => {
+    this.setState({ currentPage: pageNumber });
+  };
+
   render() {
+    //PAGINATION
+    const { currentPage, personsPerPage } = this.state;
+    const indexOfLastPerson = currentPage * personsPerPage;
+    const indexOfFirstPerson = indexOfLastPerson - personsPerPage;
+    const currentPersons = this.getSortedData().slice(
+      indexOfFirstPerson,
+      indexOfLastPerson
+    );
+    const totalPages = Math.ceil(this.getSortedData().length / personsPerPage);
+    const nextPage = () => {
+      this.state.currentPage < totalPages &&
+        this.setState({ currentPage: this.state.currentPage + 1 });
+    };
+    const lastPage = () => {
+      this.state.currentPage < totalPages &&
+        this.setState({ currentPage: totalPages });
+    };
+
     // console.log(this.props.persons);
     return (
       <div>
@@ -182,7 +215,7 @@ class PersonList extends Component {
             </tr>
           </thead>
           <tbody className="center">
-            {this.getSortedData().map((person, i) => (
+            {currentPersons.map((person, i) => (
               <tr key={i}>
                 <th>{i + 1}</th>
                 <td>{person.firstname}</td>
@@ -191,23 +224,66 @@ class PersonList extends Component {
                 <td>{person.age}</td>
                 <td>{person.gender}</td>
                 <td>
-                  <button className="edit" id={person._id} onClick={this.edit}>
-                    Edit
+                  <button className="edit">
+                    <i
+                      id={person._id}
+                      onClick={this.edit}
+                      className="fas fa-user-edit"
+                    ></i>
                   </button>
                 </td>
                 <td>
-                  <button
-                    className="delete"
-                    id={person._id}
-                    onClick={this.deletePerson}
-                  >
-                    Delete
+                  <button className="delete">
+                    <i
+                      onClick={this.deletePerson}
+                      className="fas fa-trash-alt"
+                      id={person._id}
+                    ></i>
                   </button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+        <div className="d-flex justify-content-center container position">
+          <Button
+            className="btn1"
+            variant="link"
+            onClick={this.firstPage}
+            disabled={currentPage == 1 && true}
+          >
+            <i class="fas fa-angle-double-left"></i>
+          </Button>
+          <Button
+            className="btn1"
+            variant="link"
+            onClick={this.prevPage}
+            disabled={currentPage == 1 && true}
+          >
+            <i class="fas fa-angle-left"></i>
+          </Button>
+          <Pagination
+            currentPage={this.state.currentPage}
+            totalPages={totalPages}
+            pagination={this.pagination}
+          />
+          <Button
+            className="btn1"
+            variant="link"
+            onClick={nextPage}
+            disabled={(currentPage == totalPages && true) || totalPages == 0}
+          >
+            <i class="fas fa-angle-right"></i>
+          </Button>
+          <Button
+            className="btn1"
+            variant="link"
+            onClick={lastPage}
+            disabled={(currentPage == totalPages && true) || totalPages == 0}
+          >
+            <i class="fas fa-angle-double-right"></i>
+          </Button>
+        </div>
       </div>
     );
   }

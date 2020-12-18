@@ -10,7 +10,7 @@ function Modalpop(props) {
     <>
       <div className="center">
         <Button variant="primary" onClick={props.onAdd}>
-          Add Details
+          <i class="fas fa-user-plus"></i> Add Details
         </Button>
         <input
           className="input"
@@ -18,6 +18,9 @@ function Modalpop(props) {
           placeholder="Search Here....."
           onChange={props.searchText}
         />
+        <button className="edit" disabled="true">
+          {/* {<i class="fas fa-search"></i>} */}
+        </button>
       </div>
 
       <MyVerticallyCenteredModal

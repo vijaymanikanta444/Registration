@@ -68,15 +68,17 @@ thead {
 }
 
 .delete {
-  background: red;
-  border: 0;
-  padding: 3px 20px;
+  background: none;
+  color: red;
+  border: none;
+  /* padding: 3px 20px; */
   justify-items: center;
 }
 .edit {
-  background: #85c1e9;
-  border: 0;
-  padding: 3px 20px;
+  background: none;
+  color: #3498db;
+  border: none;
+  /* padding: 3px 20px; */
   /* padding-left: 20px;
   padding-right: 20px; */
 }
@@ -109,3 +111,17 @@ thead {
     display: none;
   }
 } */
+
+.btn1 {
+  background: none;
+  color: #3498db;
+  text-decoration: none;
+  padding-bottom: 50px;
+}
+.btn1:hover {
+  text-decoration: none;
+}
+.active {
+  background-color: #3498db;
+  color: white;
+}

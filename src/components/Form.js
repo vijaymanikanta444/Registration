@@ -66,10 +66,10 @@ class Form extends Component {
   validate = () => {
     this.setState({
       errors: {
-        firstname: !this.state.data.firstname != '',
-        lastname: !this.state.data.lastname != '',
-        age: !this.state.data.age != '',
-        gender: !this.state.data.gender != '',
+        firstname: this.state.data.firstname == '',
+        lastname: this.state.data.lastname == '',
+        age: this.state.data.age == '',
+        gender: this.state.data.gender == '',
       },
     });
     return (
